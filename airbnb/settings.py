@@ -22,21 +22,23 @@ AUTH_USER_MODEL='useraccount.User'
 SITE_ID=1
 WEBSITE_URL="http://localhost:8000"
 
-SIMPLE_JWT={
-    "ACCESS_TOKEN_LIFETIME":timedelta(minutes=60),
-    "REFRESH_TOKEN_LIFETIME":timedelta(days=7),
-    "ROTATE_REFRESH_TOKEN":False,
-    "BLACKLIST_AFTER_ROTATAION":False,
-    "UPDATE_LAST_LOGIN": False,
-    "SIGNING_KEY":"acomplexkey",
-    "ALGORITHM": "HS256",
+CSRF_COOKIE_SECURE = False
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKEN": False,
+    "BLACKLIST_AFTER_ROTATION": False,
+    "UPDATE_LAST_LOGIN": True,
+    "SIGNING_KEY": "acomplexkey",
+    "ALOGRIGTHM": "HS512",
 }
 
-ACCOUNT_USER_MODEL_USERNAME_FIELD=None
-ACCOUNT_EMAIL_REQUIRED=True
-ACCOUNT_USERNAME_REQUIRED=False
-ACCOUNT_AUTHENTICATION_METHOD='email'
-ACCOUNT_EMAIL_VERIFICATION=None
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = None
 
 REST_FRAMEWORK = {
    
@@ -50,16 +52,32 @@ REST_FRAMEWORK = {
 }
 
 
+
 CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
     'http://127.0.0.1:8000',
-    'http://localhost:3000'
+    'http://127.0.0.1:3000',
 ]
 
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:3000',
+]
+
+CORS_ORIGINS_WHITELIST =[
+    'http://localhost:3000',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:3000',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True  
+
 REST_AUTH = {
-    "USER_JWT": True,
+    "USE_JWT": True,
     "JWT_AUTH_HTTPONLY": False
 }
-
 
 
 INSTALLED_APPS = [
@@ -69,14 +87,20 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+   
     "rest_framework",
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
-    "dj_rest_auth",
-    "dj_rest_auth.registration",
+    
     "allauth",
     "allauth.account",
+    "allauth.socialaccount",
+
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
+    
     "corsheaders",
+    
     "useraccount",
     "property",
 ]

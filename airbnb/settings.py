@@ -22,8 +22,6 @@ AUTH_USER_MODEL='useraccount.User'
 SITE_ID=1
 WEBSITE_URL="http://localhost:8000"
 
-CSRF_COOKIE_SECURE = False
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
@@ -81,6 +79,7 @@ REST_AUTH = {
 
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
